@@ -27,6 +27,9 @@ var runCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(asciiArt())
 
+		if utils.AskOrAutoYes("Do you want to install curl? (y/n)", assumeYes) {
+			runRawScript("curl.sh", scripts.CurlScript)
+		}
 		if utils.AskOrAutoYes("Do you want to configure Git globally? (y/n)", assumeYes) {
 			runRawScript("git.sh", scripts.GitScript)
 		}

@@ -2,6 +2,9 @@ package scripts
 
 import _ "embed"
 
+//go:embed curl.sh
+var CurlScript string
+
 //go:embed docker.sh
 var DockerScript string
 
