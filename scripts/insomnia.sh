@@ -2,11 +2,12 @@
 
 echo "🚀 Installing Insomnia..."
 
-wget https://github.com/Kong/insomnia/releases/latest/download/Insomnia.Core.deb -O insomnia.deb
+curl -1sLf \
+  'https://packages.konghq.com/public/insomnia/setup.deb.sh' \
+  | sudo -E distro=ubuntu codename=focal bash
 
-sudo dpkg -i insomnia.deb || sudo apt-get install -f -y
-
-rm insomnia.deb
+sudo apt-get update
+sudo apt-get install insomnia
 
 echo ""
 echo "╔════════════════════════╗"
