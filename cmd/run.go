@@ -76,7 +76,8 @@ var runStep2Cmd = &cobra.Command{
 		fmt.Println("Enjoy the setup and create great projects.")
 		fmt.Println("")
 		fmt.Println("***************************************************************************")
-		fmt.Println("***** REMEMBER TO RESTART YOUR MACHINE TO APPLY THE TERMINAL SETTINGS *****")
+		fmt.Println("*****           REMEMBER TO RUN `chsh -s $(which zsh)` AND            *****") 
+		fmt.Println("*****       RESTART YOUR MACHINE TO APPLY THE TERMINAL SETTINGS       *****")
 		fmt.Println("*********************************** 😎 ************************************")
 	},
 }
