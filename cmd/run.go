@@ -25,9 +25,7 @@ var runCmd = &cobra.Command{
 	Short: "Run interactive setup",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(asciiArt())
-		// fmt.Println("⚙️  Welcome to your setup CLI!")
 
-		// if utils.AskOrAutoYes("Do you want to install Docker? (y/n)", assumeYes) {
 		if utils.AskOrAutoYes("Do you want to configure Git globally? (y/n)", assumeYes) {
 			runScript("scripts/git.sh")
 		}
