@@ -1,17 +1,15 @@
 #!/bin/sh
 
-set -e
-
 echo "🚀 Installing Insomnia..."
 
-sudo apt-get update
-sudo apt-get install -y wget gpg
+wget https://github.com/Kong/insomnia/releases/latest/download/Insomnia.Core.deb -O insomnia.deb
 
-wget -qO- https://insomnia.rest/keys/debian-public.key.asc | sudo gpg --dearmor -o /usr/share/keyrings/insomnia-archive-keyring.gpg
+sudo dpkg -i insomnia.deb || sudo apt-get install -f -y
 
-echo "deb [signed-by=/usr/share/keyrings/insomnia-archive-keyring.gpg] https://dl.bintray.com/getinsomnia/Insomnia /" | sudo tee /etc/apt/sources.list.d/insomnia.list
+rm insomnia.deb
 
-sudo apt-get update
-sudo apt-get install -y insomnia
-
-echo "✅ Insomnia installation complete!"
+echo ""
+echo "╔════════════════════════╗"
+echo "║ ✅ Insomnia installed! ║"
+echo "╚════════════════════════╝"
+echo ""

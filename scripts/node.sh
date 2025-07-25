@@ -7,4 +7,8 @@ export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh"
 nvm install --lts
 
-echo "✅ Node.js installed!\n"
+echo ""
+echo "╔═══════════════════════╗"
+echo "║ ✅ Node.js installed! ║"
+echo "╚═══════════════════════╝"
+echo ""

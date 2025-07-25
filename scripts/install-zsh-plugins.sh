@@ -32,4 +32,11 @@ source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 
   echo "🔧 Appended syntax highlighting source to .zshrc."
 fi
 
-echo "🎉 Zsh plugin setup complete! Please restart your terminal or run: `source ~/.zshrc`"
+chsh -s $(which zsh)
+
+echo ""
+echo "╔═════════════════════════════════════════════════════════╗"
+echo "║                Zsh plugin setup complete!               ║"
+echo "║  Please restart your terminal or run: source ~/.zshrc   ║"
+echo "╚═════════════════════════════════════════════════════════╝"
+echo ""

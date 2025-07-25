@@ -20,4 +20,8 @@ rm -f packages.microsoft.gpg
 sudo apt update
 sudo apt install -y code
 
-echo "✅ VS Code installed!\n"
+echo ""
+echo "╔══════════════════════════════════════╗"
+echo "║ ✅ VS Code installation completed!   ║"
+echo "╚══════════════════════════════════════╝"
+echo ""

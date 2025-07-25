@@ -12,4 +12,9 @@ rm go${GO_VERSION}.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.zshrc
 
-echo "✅ Golang ${GO_VERSION} installed! Run 'source ~/.zshrc' or 'source ~/.bashrc' to update your path.\n"
+echo ""
+echo "╔══════════════════════════════════════════════════════════════════╗"
+echo "║                  Golang ${GO_VERSION} installed!                 ║"
+echo "║ Run 'source ~/.zshrc' or 'source ~/.bashrc' to update your path. ║"
+echo "╚══════════════════════════════════════════════════════════════════╝"
+echo ""
