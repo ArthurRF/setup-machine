@@ -32,6 +32,9 @@ source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 
   echo "🔧 Appended syntax highlighting source to .zshrc."
 fi
 
+echo "Plugins installed... Setting ZSH as default bash :)"
+
+zsh
 chsh -s $(which zsh)
 
 echo ""

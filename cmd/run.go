@@ -71,9 +71,13 @@ var runStep2Cmd = &cobra.Command{
 			utils.RunRawScript("install-zsh-plugins.sh", scripts.ZshPluginsScript)
 		}
 
+		fmt.Println("")
 		fmt.Println("\n🎉 Second step complete!")
 		fmt.Println("Enjoy the setup and create great projects.")
-		fmt.Println("     ---- 😎 ----")
+		fmt.Println("")
+		fmt.Println("***************************************************************************")
+		fmt.Println("***** REMEMBER TO RESTART YOUR MACHINE TO APPLY THE TERMINAL SETTINGS *****")
+		fmt.Println("*********************************** 😎 ************************************")
 	},
 }
 
