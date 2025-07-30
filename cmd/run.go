@@ -71,12 +71,14 @@ var runStep2Cmd = &cobra.Command{
 			utils.RunRawScript("install-zsh-plugins.sh", scripts.ZshPluginsScript)
 		}
 
+		utils.RunRawScript("add-killport.sh", scripts.AddKillportScript)
+
 		fmt.Println("")
 		fmt.Println("\n🎉 Second step complete!")
 		fmt.Println("Enjoy the setup and create great projects.")
 		fmt.Println("")
 		fmt.Println("***************************************************************************")
-		fmt.Println("*****           REMEMBER TO RUN `chsh -s $(which zsh)` AND            *****") 
+		fmt.Println("*****           REMEMBER TO RUN `chsh -s $(which zsh)` AND            *****")
 		fmt.Println("*****       RESTART YOUR MACHINE TO APPLY THE TERMINAL SETTINGS       *****")
 		fmt.Println("*********************************** 😎 ************************************")
 	},
