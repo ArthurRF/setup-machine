@@ -34,3 +34,6 @@ var InsomniaScript string
 
 //go:embed add-killport.sh
 var AddKillportScript string
+
+//go:embed vim.sh
+var VimScript string

@@ -37,6 +37,9 @@ var runStep1Cmd = &cobra.Command{
 		if utils.AskOrAutoYes("Do you want to install ZSH + Oh My Zsh + Powerlevel10k? (y/n)", assumeYes) {
 			utils.RunRawScript("zsh.sh", scripts.ZshScript)
 		}
+		if utils.AskOrAutoYes("Do you want to Vim? (y/n)", assumeYes) {
+			utils.RunRawScript("vim.sh", scripts.VimScript)
+		}
 		if utils.AskOrAutoYes("Do you want to install Go (Golang)? (y/n)", assumeYes) {
 			utils.RunRawScript("golang.sh", scripts.GolangScript)
 		}
@@ -57,7 +60,9 @@ var runStep2Cmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Allowing docker to run without sudo...")
 
-		utils.RunRawScript("allow-docker-run.sh", scripts.AllowDockerRunScript)
+		if utils.AskOrAutoYes("Do you want to allow docker to run without sudo? (y/n)", assumeYes) {
+			utils.RunRawScript("allow-docker-run.sh", scripts.AllowDockerRunScript)
+		}
 
 		if utils.AskOrAutoYes("Do you want to install Visual Studio Code? (y/n)", assumeYes) {
 			utils.RunRawScript("vscode.sh", scripts.VscodeScript)
@@ -71,7 +76,9 @@ var runStep2Cmd = &cobra.Command{
 			utils.RunRawScript("install-zsh-plugins.sh", scripts.ZshPluginsScript)
 		}
 
-		utils.RunRawScript("add-killport.sh", scripts.AddKillportScript)
+		if utils.AskOrAutoYes("Do you want to add the killport script? (y/n)", assumeYes) {
+			utils.RunRawScript("add-killport.sh", scripts.AddKillportScript)
+		}
 
 		fmt.Println("")
 		fmt.Println("\n🎉 Second step complete!")
