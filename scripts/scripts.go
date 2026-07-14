@@ -29,11 +29,14 @@ var GolangScript string
 //go:embed vscode.sh
 var VscodeScript string
 
-//go:embed insomnia.sh
-var InsomniaScript string
+//go:embed bruno.sh
+var BrunoScript string
 
 //go:embed add-killport.sh
 var AddKillportScript string
 
 //go:embed vim.sh
 var VimScript string
+
+//go:embed homebrew.sh
+var HomebrewScript string

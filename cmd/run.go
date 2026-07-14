@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/ArthurRF/setup-machine/scripts"
 	"github.com/ArthurRF/setup-machine/utils"
@@ -25,26 +26,35 @@ var runStep1Cmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(asciiArt())
 
+		osType := utils.AskOS()
+		env := []string{"OS_TYPE=" + osType}
+
+		if osType == "mac" {
+			utils.RunRawScriptWithEnv("homebrew.sh", scripts.HomebrewScript, env)
+			// Ensure brew is in PATH for all subsequent scripts (Apple Silicon: /opt/homebrew, Intel: /usr/local)
+			env = append(env, "PATH=/opt/homebrew/bin:/usr/local/bin:"+os.Getenv("PATH"))
+		}
+
 		if utils.AskOrAutoYes("Do you want to install curl? (y/n)", assumeYes) {
-			utils.RunRawScript("curl.sh", scripts.CurlScript)
+			utils.RunRawScriptWithEnv("curl.sh", scripts.CurlScript, env)
 		}
 		if utils.AskOrAutoYes("Do you want to configure Git globally? (y/n)", assumeYes) {
-			utils.RunRawScript("git.sh", scripts.GitScript)
+			utils.RunRawScriptWithEnv("git.sh", scripts.GitScript, env)
 		}
 		if utils.AskOrAutoYes("Do you want to install Docker? (y/n)", assumeYes) {
-			utils.RunRawScript("docker.sh", scripts.DockerScript)
+			utils.RunRawScriptWithEnv("docker.sh", scripts.DockerScript, env)
 		}
 		if utils.AskOrAutoYes("Do you want to install ZSH + Oh My Zsh + Powerlevel10k? (y/n)", assumeYes) {
-			utils.RunRawScript("zsh.sh", scripts.ZshScript)
+			utils.RunRawScriptWithEnv("zsh.sh", scripts.ZshScript, env)
 		}
-		if utils.AskOrAutoYes("Do you want to Vim? (y/n)", assumeYes) {
-			utils.RunRawScript("vim.sh", scripts.VimScript)
+		if utils.AskOrAutoYes("Do you want to install Vim? (y/n)", assumeYes) {
+			utils.RunRawScriptWithEnv("vim.sh", scripts.VimScript, env)
 		}
 		if utils.AskOrAutoYes("Do you want to install Go (Golang)? (y/n)", assumeYes) {
-			utils.RunRawScript("golang.sh", scripts.GolangScript)
+			utils.RunRawScriptWithEnv("golang.sh", scripts.GolangScript, env)
 		}
 		if utils.AskOrAutoYes("Do you want to install Node.js (via nvm)? (y/n)", assumeYes) {
-			utils.RunRawScript("node.sh", scripts.NodeScript)
+			utils.RunRawScriptWithEnv("node.sh", scripts.NodeScript, env)
 		}
 
 		fmt.Println("\n🎉 First step complete!")
@@ -58,26 +68,31 @@ var runStep2Cmd = &cobra.Command{
 	Use:   "step2",
 	Short: "Run the second step of the interactive setup",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Allowing docker to run without sudo...")
+		osType := utils.AskOS()
+		env := []string{"OS_TYPE=" + osType}
+
+		if osType == "mac" {
+			env = append(env, "PATH=/opt/homebrew/bin:/usr/local/bin:"+os.Getenv("PATH"))
+		}
 
 		if utils.AskOrAutoYes("Do you want to allow docker to run without sudo? (y/n)", assumeYes) {
-			utils.RunRawScript("allow-docker-run.sh", scripts.AllowDockerRunScript)
+			utils.RunRawScriptWithEnv("allow-docker-run.sh", scripts.AllowDockerRunScript, env)
 		}
 
 		if utils.AskOrAutoYes("Do you want to install Visual Studio Code? (y/n)", assumeYes) {
-			utils.RunRawScript("vscode.sh", scripts.VscodeScript)
+			utils.RunRawScriptWithEnv("vscode.sh", scripts.VscodeScript, env)
 		}
 
-		if utils.AskOrAutoYes("Do you want to install Insomnia? (y/n)", assumeYes) {
-			utils.RunRawScript("insomnia.sh", scripts.InsomniaScript)
+		if utils.AskOrAutoYes("Do you want to install Bruno (REST client)? (y/n)", assumeYes) {
+			utils.RunRawScriptWithEnv("bruno.sh", scripts.BrunoScript, env)
 		}
 
 		if utils.AskOrAutoYes("Do you want to install the ZSH important plugins? (y/n)", assumeYes) {
-			utils.RunRawScript("install-zsh-plugins.sh", scripts.ZshPluginsScript)
+			utils.RunRawScriptWithEnv("install-zsh-plugins.sh", scripts.ZshPluginsScript, env)
 		}
 
 		if utils.AskOrAutoYes("Do you want to add the killport script? (y/n)", assumeYes) {
-			utils.RunRawScript("add-killport.sh", scripts.AddKillportScript)
+			utils.RunRawScriptWithEnv("add-killport.sh", scripts.AddKillportScript, env)
 		}
 
 		fmt.Println("")
