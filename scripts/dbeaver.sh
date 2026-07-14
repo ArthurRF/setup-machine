@@ -8,7 +8,7 @@ if command -v dbeaver >/dev/null 2>&1; then
 fi
 
 if [ "$OS_TYPE" = "mac" ]; then
-  if [ "$(uname -m)" = "arm64" ]; then
+  if [ "$(sysctl -n hw.optional.arm64 2>/dev/null)" = "1" ]; then
     arch -arm64 brew install --cask dbeaver-community
   else
     brew install --cask dbeaver-community
