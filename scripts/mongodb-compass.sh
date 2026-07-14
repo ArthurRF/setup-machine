@@ -8,7 +8,11 @@ if command -v mongodb-compass >/dev/null 2>&1; then
 fi
 
 if [ "$OS_TYPE" = "mac" ]; then
-  brew install --cask mongodb-compass
+  if [ "$(uname -m)" = "arm64" ]; then
+    arch -arm64 brew install --cask mongodb-compass
+  else
+    brew install --cask mongodb-compass
+  fi
 else
   COMPASS_VERSION=$(curl -s https://api.github.com/repos/mongodb-js/compass/releases | grep '"tag_name"' | grep '@mongodb-js/compass@' | head -1 | sed 's/.*@mongodb-js\/compass@\([^"]*\)".*/\1/')
   if [ -z "$COMPASS_VERSION" ]; then

@@ -8,7 +8,11 @@ if command -v dbeaver >/dev/null 2>&1; then
 fi
 
 if [ "$OS_TYPE" = "mac" ]; then
-  brew install --cask dbeaver-community
+  if [ "$(uname -m)" = "arm64" ]; then
+    arch -arm64 brew install --cask dbeaver-community
+  else
+    brew install --cask dbeaver-community
+  fi
 else
   DBEAVER_VERSION=$(curl -s https://api.github.com/repos/dbeaver/dbeaver/releases/latest | grep '"tag_name"' | sed 's/.*"\([^"]*\)".*/\1/')
   if [ -z "$DBEAVER_VERSION" ]; then
