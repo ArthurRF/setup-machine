@@ -33,6 +33,7 @@ func RunRawScriptWithEnv(name string, content string, extraEnv []string) {
 	tmpFile.Close()
 
 	cmd := exec.Command("sh", tmpFile.Name())
+	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Env = append(os.Environ(), extraEnv...)

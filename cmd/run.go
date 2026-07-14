@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/ArthurRF/setup-machine/scripts"
 	"github.com/ArthurRF/setup-machine/utils"
@@ -30,6 +31,8 @@ var runStep1Cmd = &cobra.Command{
 
 		if osType == "mac" {
 			utils.RunRawScriptWithEnv("homebrew.sh", scripts.HomebrewScript, env)
+			// Ensure brew is in PATH for all subsequent scripts (Apple Silicon: /opt/homebrew, Intel: /usr/local)
+			env = append(env, "PATH=/opt/homebrew/bin:/usr/local/bin:"+os.Getenv("PATH"))
 		}
 
 		if utils.AskOrAutoYes("Do you want to install curl? (y/n)", assumeYes) {
@@ -67,6 +70,10 @@ var runStep2Cmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		osType := utils.AskOS()
 		env := []string{"OS_TYPE=" + osType}
+
+		if osType == "mac" {
+			env = append(env, "PATH=/opt/homebrew/bin:/usr/local/bin:"+os.Getenv("PATH"))
+		}
 
 		if utils.AskOrAutoYes("Do you want to allow docker to run without sudo? (y/n)", assumeYes) {
 			utils.RunRawScriptWithEnv("allow-docker-run.sh", scripts.AllowDockerRunScript, env)
