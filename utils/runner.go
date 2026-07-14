@@ -7,6 +7,10 @@ import (
 )
 
 func RunRawScript(name string, content string) {
+	RunRawScriptWithEnv(name, content, nil)
+}
+
+func RunRawScriptWithEnv(name string, content string, extraEnv []string) {
 	tmpFile, err := os.CreateTemp("", name)
 	if err != nil {
 		fmt.Printf("❌ Failed to create temp file: %v\n", err)
@@ -31,6 +35,7 @@ func RunRawScript(name string, content string) {
 	cmd := exec.Command("sh", tmpFile.Name())
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	cmd.Env = append(os.Environ(), extraEnv...)
 	err = cmd.Run()
 	if err != nil {
 		fmt.Printf("❌ Failed to run %s: %v\n", tmpFile.Name(), err)

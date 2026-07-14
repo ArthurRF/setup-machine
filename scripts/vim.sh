@@ -2,7 +2,11 @@
 
 echo "👽 Installing Vim..."
 
-sudo apt-get install -y vim
+if [ "$OS_TYPE" = "mac" ]; then
+  brew install vim
+else
+  sudo apt-get install -y vim
+fi
 
 echo ""
 echo "╔════════════════════╗"

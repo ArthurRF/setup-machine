@@ -4,8 +4,12 @@ echo "🔧 Checking if Git is installed..."
 
 if ! command -v git >/dev/null 2>&1; then
   echo "🚧 Git not found. Installing Git..."
-  sudo apt update
-  sudo apt install -y git
+  if [ "$OS_TYPE" = "mac" ]; then
+    brew install git
+  else
+    sudo apt update
+    sudo apt install -y git
+  fi
 else
   echo "✅ Git is already installed."
 fi
