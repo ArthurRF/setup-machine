@@ -40,3 +40,9 @@ var VimScript string
 
 //go:embed homebrew.sh
 var HomebrewScript string
+
+//go:embed dbeaver.sh
+var DbeaverScript string
+
+//go:embed mongodb-compass.sh
+var MongodbCompassScript string

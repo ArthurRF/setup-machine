@@ -95,6 +95,14 @@ var runStep2Cmd = &cobra.Command{
 			utils.RunRawScriptWithEnv("add-killport.sh", scripts.AddKillportScript, env)
 		}
 
+		if utils.AskOrAutoYes("Do you want to install DBeaver (database tool)? (y/n)", assumeYes) {
+			utils.RunRawScriptWithEnv("dbeaver.sh", scripts.DbeaverScript, env)
+		}
+
+		if utils.AskOrAutoYes("Do you want to install MongoDB Compass? (y/n)", assumeYes) {
+			utils.RunRawScriptWithEnv("mongodb-compass.sh", scripts.MongodbCompassScript, env)
+		}
+
 		fmt.Println("")
 		fmt.Println("\n🎉 Second step complete!")
 		fmt.Println("Enjoy the setup and create great projects.")
